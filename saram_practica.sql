@@ -72,3 +72,24 @@ values
 ('Fight Club', 'Drama, Acción', 'David Fincher', 'Un hombre desencantado con su vida encuentra un escape a través de un club secreto de peleas, pero pronto la violencia se descontrola.'),
 ('American History X', 'Drama, Crimen', 'Tony Kaye', 'Un ex neonazi intenta redimir sus acciones tras salir de prisión, mientras su hermano lucha por evitar el mismo destino.'),
 ('Goodfellas', 'Crimen, Drama', 'Martin Scorsese', 'La vida de un joven que se involucra en el crimen organizado y cómo la violencia y la traición lo afectan a lo largo de los años.');
+
+insert into correspondencia (id_socio, codigo_postal, calle, numero, piso)
+values
+(1, 28001, 'Gran vía', 1002, 6),
+(2, 33051, 'Cristobal Colon', 2508, 10);
+
+insert into copias (id_pelicula, disponible)
+values
+(1, true), (1, true),
+(2, true), (2, false),
+(3, true), (3, true), (3, false),
+(4, true), (4, false),
+(5, true), (5, true), (5, true);
+
+insert into prestadas (id_copia, id_socio, fecha_prestada, fecha_devolucion)
+values
+(2, 1, '2025-02-27', NULL),
+(1, 2, '2025-02-14', '2025-02-28'),
+(3, 3, '2025-03-03', NULL),
+(4, 4, '2025-03-06', NULL),
+(5, 4, '2025-01-25', '2025-02-10');
