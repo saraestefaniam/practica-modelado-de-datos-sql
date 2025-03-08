@@ -21,7 +21,6 @@ create table peliculas(
 create table copias(
 	id serial primary key,
 	id_pelicula integer not null,
-	disponible bool not null,
 	constraint copias_peliculas_fk foreign key (id_pelicula) references peliculas(id)
 );
 
@@ -78,18 +77,38 @@ values
 (1, 28001, 'Gran vía', 1002, 6),
 (2, 33051, 'Cristobal Colon', 2508, 10);
 
-insert into copias (id_pelicula, disponible)
+insert into copias (id_pelicula)
 values
-(1, true), (1, true),
-(2, true), (2, false),
-(3, true), (3, true), (3, false),
-(4, true), (4, false),
-(5, true), (5, true), (5, true);
+(1), (1),
+(2), (2),
+(3), (3),
+(4), (4), (4),
+(5), (5),
+(6), (6),
+(7), (7),
+(8), (8), (8),
+(9), (9),
+(10), (10),
+(11);
 
 insert into prestadas (id_copia, id_socio, fecha_prestada, fecha_devolucion)
 values
-(2, 1, '2025-02-27', NULL),
-(1, 2, '2025-02-14', '2025-02-28'),
-(3, 3, '2025-03-03', NULL),
-(4, 4, '2025-03-06', NULL),
+(4, 1, '2025-02-27', NULL),
+(1, 2, '2025-02-14', '2025-02-28'), 
+(7, 3, '2025-03-03', NULL), 
+(9, 4, '2025-03-06', NULL), 
 (5, 4, '2025-01-25', '2025-02-10');
+
+insert into prestadas (id_copia, id_socio, fecha_prestada, fecha_devolucion)
+values
+(22, 5, '2025-03-07', NULL);
+
+insert into prestadas (id_copia, id_socio, fecha_prestada, fecha_devolucion)
+values
+(23, 5, '2025-03-07', NULL);
+
+select peliculas.titulo, count(copias.id) as copias_disponibles from copias 
+join peliculas on copias.id_pelicula = peliculas.id  
+left join prestadas on copias.id = prestadas.id_copia and prestadas.fecha_devolucion is null
+where prestadas.id_copia is null
+group by peliculas.titulo;
